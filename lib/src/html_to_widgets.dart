@@ -239,6 +239,13 @@ class WidgetsHTMLDecoder {
     switch (localName) {
       /// Handle <bold> element
       case HTMLTags.bold || HTMLTags.strong:
+        if(element.parent != null){
+          final deltaAttributes = _getDeltaAttributesFromHtmlAttributes(
+            element.parent!.attributes
+          );
+          textAlign = deltaAttributes.$1;
+        }
+
         attributes = attributes
             .copyWith(fontWeight: FontWeight.bold)
             .merge(customStyles.boldStyle);
