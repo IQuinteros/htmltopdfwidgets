@@ -441,6 +441,7 @@ class WidgetsHTMLDecoder {
         textAlign = attributes.$1;
         delta.add(TextSpan(text: child.text, style: attributes.$2));
       } else {
+        textAlign = _getDeltaAttributesFromHtmlAttributes(element.attributes).$1;
         delta.add(TextSpan(
             text: child.text,
             style: TextStyle(font: font, fontFallback: fontFallback)));
