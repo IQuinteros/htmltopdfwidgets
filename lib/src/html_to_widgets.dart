@@ -267,7 +267,7 @@ class WidgetsHTMLDecoder {
           final deltaAttributes = _getDeltaAttributesFromHtmlAttributes(
             element.parent!.attributes
           );
-          textAlign = deltaAttributes.$1;
+          textAlign = (await deltaAttributes).$1;
         }
 
         attributes = attributes
@@ -482,10 +482,10 @@ class WidgetsHTMLDecoder {
         textAlign = attributes.$1;
         delta.add(TextSpan(text: child.text, style: attributes.$2));
       } else {
-        textAlign = _getDeltaAttributesFromHtmlAttributes(element.attributes).$1;
+        textAlign = (await _getDeltaAttributesFromHtmlAttributes(element.attributes)).$1;
         delta.add(TextSpan(
             text: child.text,
-            style: TextStyle(font: font, fontFallback: fontFallback)));
+            style: TextStyle(font: await fontResolver?.call(defaultFontFamily, false, false), fontFallback: fontFallback)));
       }
     }
 
